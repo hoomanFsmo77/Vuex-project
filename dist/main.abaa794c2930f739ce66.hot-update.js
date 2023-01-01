@@ -14,13 +14,13 @@ self["webpackHotUpdatetemplate"]("main",{},
 /******/ 	// This function allow to reference async chunks
 /******/ 	__webpack_require__.u = (chunkId) => {
 /******/ 		// return url for filenames based on template
-/******/ 		return "" + chunkId + "." + {"src_pages_Home_vue":"f76597077629f46431b8","src_pages_Product_vue":"43f1e15cbcd0795c4013","src_pages_Task_vue":"bdc458701fc90dcd1321"}[chunkId] + ".js";
+/******/ 		return "" + chunkId + "." + {"src_pages_Home_vue":"f76597077629f46431b8","src_pages_Product_vue":"43f1e15cbcd0795c4013","src_pages_Task_vue":"5ac5ffcc4a9ea9a0adf1"}[chunkId] + ".js";
 /******/ 	};
 /******/ })();
 /******/ 
 /******/ /* webpack/runtime/getFullHash */
 /******/ (() => {
-/******/ 	__webpack_require__.h = () => ("7614efd32f5947782d16")
+/******/ 	__webpack_require__.h = () => ("447db76d8461cc7538c9")
 /******/ })();
 /******/ 
 /******/ }

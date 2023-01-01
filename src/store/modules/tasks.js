@@ -5,7 +5,7 @@ export default {
     state:{
         tasks:[],
         fetchFlag:false,
-        createFlag:false
+        createFlag:false,
     },
     getters:{
 
@@ -19,13 +19,18 @@ export default {
         },
         addNewTask(state,payload){
             state.tasks.unshift({
-                title:payload.title.value,
-                completed:payload.completed.value
+                id:payload.id,
+                title:payload.title,
+                completed:payload.completed
             })
         },
         setCreateFlag(state,payload){
             state.createFlag=payload
-        }
+        },
+        updateTask(state,payload){
+            state.tasks.filter(task=>task.id===payload.id)[0].completed=payload.completed
+        },
+
     },
     actions:{
         taskAction({commit}){
@@ -52,11 +57,11 @@ export default {
         },
         createAction({commit},payload){
             commit('setCreateFlag',true)
-            axios.post('https://jsonplaceholder.typicode.com/posts',{
+            axios.post('https://jsonplaceholder.typicode.com/todos',{
                 title:payload.title.value,
                 completed:payload.completed.value
             }).then(response=>{
-                commit('addNewTask',payload)
+                commit('addNewTask',response.data)
                 commit('setCreateFlag',false)
                 Swal.fire({
                     icon: 'success',
@@ -66,6 +71,29 @@ export default {
                 payload.completed.value=''
             }).catch(err=>{
                 commit('setCreateFlag',false)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: 'There is a problem, please try again',
+                })
+            })
+        },
+        updateAction({commit},payload){
+            axios.put(`https://jsonplaceholder.typicode.com/todos/${payload.id}`,{
+                completed:!payload.completed
+            }).then(response=>{
+                commit('updateTask',response.data)
+                payload.loading.value=false
+                Swal.fire({
+                    title: "Task Updated",
+                    icon: "success",
+                    showConfirmButton: false,
+                    timerProgressBar: true,
+                    timer: 3000,
+                    toast: true,
+                    position: 'top',
+                });
+            }).catch(err=>{
                 Swal.fire({
                     icon: 'error',
                     title: 'Error!',
