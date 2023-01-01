@@ -8,18 +8,29 @@
   height: 100%;
   z-index: 44;
 }
-.visible {
-  visibility: visible !important;
+.preloader .outer {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 5px solid rgba(96, 55, 200, 0.8);
+  position: relative;
 }
-.hide {
-  visibility: hidden !important;
+.preloader .inner {
+  display: inline-block;
+  position: absolute;
+  height: 130px;
+  width: 23px;
+  right: 33px;
+  bottom: -25px;
+  background-color: white;
+  animation: rotate infinite 1s linear;
 }
-.op-0 {
-  opacity: 0 !important;
+@keyframes rotate {
+0% {
+    transform: rotate(0deg);
 }
-.op-100 {
-  opacity: 100 !important;
+100% {
+    transform: rotate(360deg);
 }
-.transition {
-  transition: all 200ms linear;
 }
