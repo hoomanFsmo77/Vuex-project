@@ -5,36 +5,23 @@
     </span>
   </div>
   <v-container  class="pt-10 ">
+    <Create/>
+    <hr class="my-5 v-divider">
     <Filter/>
-    <v-row v-if="fetchFlag" >
-      <v-col cols="4" v-for="task in tasks">
-        <v-card :class="{'bg-brown-lighten-5 ':task.completed}">
-          <template  v-slot:text>
-            <div class="d-flex flex-row justify-space-between align-center">
-              <span :class="{'text-decoration-line-through':task.completed}">{{task.title}}</span>
-              <v-icon v-if="!task.completed" icon="mdi-check"></v-icon>
-              <v-icon v-else icon="mdi-check-all"></v-icon>
-            </div>
-          </template>
-        </v-card>
-      </v-col>
-
-    </v-row>
+    <Show/>
   </v-container>
 </template>
 
 <script setup>
-import Filter from "../components/Filter.vue";
-import {computed,onMounted} from "vue";
+import Filter from "../components/Task/Filter.vue";
+import Create from "../components/Task/Create.vue";
+import Show from "../components/Task/Show.vue";
+import {computed} from "vue";
 import {useStore} from 'vuex'
 /////////////////////////////////////
 const store=useStore()
-const tasks=computed(()=>store.state.tasks.tasks)
 const fetchFlag=computed(()=>store.state.tasks.fetchFlag)
 
-onMounted(()=>{
-  store.dispatch('tasks/taskAction')
-})
 
 </script>
 
