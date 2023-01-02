@@ -4,41 +4,40 @@
         v-model="tab"
         bg-color="primary"
     >
-      <router-link :to="{name:'home'}">
-        <v-tab value="one">
-          Home
-        </v-tab>
-      </router-link>
-      <router-link :to="{name:'task'}">
-        <v-tab value="two">
-          Tasks
-        </v-tab>
-      </router-link>
-      <router-link :to="{name:'product'}">
-        <v-tab value="three">
-          product
-        </v-tab>
-      </router-link>
+      <div class="d-flex justify-space-between align-center w-100 flex-row">
+        <div>
+          <router-link :to="{name:'home'}">
+            <v-tab value="one">
+              Home
+            </v-tab>
+          </router-link>
+          <router-link :to="{name:'task'}">
+            <v-tab value="two">
+              Tasks
+            </v-tab>
+          </router-link>
+          <router-link :to="{name:'product'}">
+            <v-tab value="three">
+              product
+            </v-tab>
+          </router-link>
+        </div>
+        <router-link :to="{name:'cart'}">
+          <v-tab value="four">
+            <v-badge :content="store.getters['cart/cartLength']">
+              <v-icon icon="mdi-basket" size="x-large"></v-icon>
+            </v-badge>
+          </v-tab>
+        </router-link>
+
+      </div>
     </v-tabs>
-
   </v-card>
-
 </template>
 
 <script setup>
-import {ref,onMounted,watch} from "vue";
-import {useRoute} from 'vue-router'
-//////////////////////
-const tab=ref(null)
-const route=useRoute()
-
-watch(
-    ()=>route.path,
-    ()=>{
-      tab.value=route.name.includes('home') ? 'one' :route.name.includes('task') ? 'two':'three'
-    }
-)
-
+import useHeader from "../composables/useHeader.js";
+const {store,route,tab}=useHeader()
 
 </script>
 

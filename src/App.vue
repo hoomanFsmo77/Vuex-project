@@ -2,7 +2,7 @@
   <Header/>
   <main class="position-relative " >
     <router-view v-slot="{Component}">
-      <keep-alive>
+      <keep-alive >
         <component :is="Component"/>
       </keep-alive>
     </router-view>
@@ -22,7 +22,5 @@ import Header from "./components/Header.vue";
 
 </script>
 <style>
-main{
-  height: 100vh;
-}
+
 </style>

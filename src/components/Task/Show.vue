@@ -5,7 +5,10 @@
         <template  v-slot:text>
           <div class="d-flex flex-row justify-space-between align-center">
             <span :class="{'text-decoration-line-through':task.completed}">{{task.title}}</span>
-            <Update :task="task"/>
+            <div class="d-flex">
+              <Update :task="task"/>
+              <Delete :task="task"/>
+            </div>
           </div>
         </template>
       </v-card>
@@ -17,6 +20,7 @@
 <script setup>
 import {computed,onMounted} from "vue";
 import Update from "./Update.vue";
+import Delete from './Delete.vue'
 import {useStore} from 'vuex'
 /////////////////////////////////////
 const store=useStore()

@@ -30,6 +30,9 @@ export default {
         updateTask(state,payload){
             state.tasks.filter(task=>task.id===payload.id)[0].completed=payload.completed
         },
+        deleteTask(state,id){
+            state.tasks.splice(state.tasks.findIndex(task=>task.id===id),1)
+        }
 
     },
     actions:{
@@ -100,7 +103,36 @@ export default {
                     text: 'There is a problem, please try again',
                 })
             })
-        }
+        },
+        deleteAction({commit},payload){
+            axios.delete(`https://jsonplaceholder.typicode.com/todos/${payload.id}`).
+            then(response=>{
+                payload.loading.value=false
+                commit('deleteTask',payload.id)
+                Swal.fire({
+                    title: "Task Deleted",
+                    icon: "warning",
+                    showConfirmButton: false,
+                    timerProgressBar: true,
+                    timer: 3000,
+                    toast: true,
+                    position: 'top',
+                });
+            }).
+            catch(err=>{
+                payload.loading.value=false
+                Swal.fire({
+                    title: "Something went wrong!",
+                    icon: "error",
+                    showConfirmButton: false,
+                    timerProgressBar: true,
+                    timer: 3000,
+                    toast: true,
+                    position: 'top',
+                });
 
+            })
+
+        }
     }
 }
